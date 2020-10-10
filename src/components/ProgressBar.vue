@@ -19,14 +19,20 @@ export default Vue.extend({
     progress: Number,
     label: String,
   },
+  data() {
+    return {
+      progressWidth: 20,
+    };
+  },
   computed: {
     barSize(): Number {
       return Number(this.size) || 250;
     },
-    progressWidth(): Number {
-      const currentProgress = (Number(this.progress) * Number(this.barSize)) / 100;
-      return currentProgress;
-    },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.progressWidth = (Number(this.progress) * Number(this.barSize)) / 100;
+    }, 1);
   },
 });
 </script>
@@ -52,6 +58,8 @@ export default Vue.extend({
     &__filled {
       position: absolute;
       border-radius: inherit;
+      width: 0px;
+      transition: all 1s ease-in-out;
 
       height: 20px;
 
