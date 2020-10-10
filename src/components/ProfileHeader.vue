@@ -1,12 +1,6 @@
 <template>
   <div class="profile__header">
-    <img
-      width="180px"
-      height="180px"
-      :class="'profile__header__picture' + (loaded ? ' loaded' : '')"
-      :src="pictureUrl"
-      @load="onLoad"
-    />
+    <Img width="180px" height="180px" class="profile__header__picture" :src="pictureUrl" />
     <h1 class="profile__header__name">{{ name }}</h1>
   </div>
 </template>
@@ -14,21 +8,16 @@
 <script lang="ts">
 import Vue from 'vue';
 
+import Img from './Img.vue';
+
 export default Vue.extend({
   name: 'ProfileHeader',
+  components: {
+    Img,
+  },
   props: {
     pictureUrl: String,
     name: String,
-  },
-  data() {
-    return {
-      loaded: false,
-    };
-  },
-  methods: {
-    onLoad() {
-      this.loaded = true;
-    },
   },
 });
 </script>
@@ -41,12 +30,6 @@ export default Vue.extend({
 
   &__picture {
     border-radius: 50%;
-    transition: opacity 0.6s ease-in-out;
-    opacity: 0;
-
-    &.loaded {
-      opacity: 1;
-    }
   }
 
   &__name {
